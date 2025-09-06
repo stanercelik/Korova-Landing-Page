@@ -16,10 +16,10 @@ export function FounderTiersSection() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="heading-lg text-foreground mb-6">
-              Become a CineMatch Founder
+              Become a Korova Founder
             </h2>
             <p className="body-lg text-muted-foreground max-w-3xl mx-auto">
-              Join our exclusive founder program and help shape the future of CineMatch. 
+              Join our exclusive founder program and help shape the future of Korova. 
               Get lifetime access, special perks, and be part of our founding community.
             </p>
             <div className="inline-flex items-center mt-4 px-4 py-2 bg-primary/10 rounded-full">

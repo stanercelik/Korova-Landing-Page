@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CineMatch | Find Your People Through The Films You Love",
-  description: "Tired of superficial connections? CineMatch connects you with friends and partners based on your unique movie taste. Join the waitlist for exclusive early access.",
+  title: "Korova | Find Your People Through The Films You Love",
+  description: "Tired of superficial connections? Korova connects you with friends and partners based on your unique movie taste. Join the waitlist for exclusive early access.",
   keywords: [
     "movie matching",
     "film lovers", 
@@ -25,21 +25,21 @@ export const metadata: Metadata = {
     "dating app",
     "friendship app"
   ],
-  authors: [{ name: "CineMatch Team" }],
-  creator: "CineMatch",
+  authors: [{ name: "Korova Team" }],
+  creator: "Korova",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://cinematch.app",
-    title: "CineMatch | Find Your People Through The Films You Love",
-    description: "Tired of superficial connections? CineMatch connects you with friends and partners based on your unique movie taste.",
-    siteName: "CineMatch",
+    url: "https://korova.app",
+    title: "Korova | Find Your People Through The Films You Love",
+    description: "Tired of superficial connections? Korova connects you with friends and partners based on your unique movie taste.",
+    siteName: "Korova",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CineMatch | Find Your People Through The Films You Love",
-    description: "Tired of superficial connections? CineMatch connects you with friends and partners based on your unique movie taste.",
-    creator: "@cinematch_app",
+    title: "Korova | Find Your People Through The Films You Love",
+    description: "Tired of superficial connections? Korova connects you with friends and partners based on your unique movie taste.",
+    creator: "@korova_app",
   },
   robots: {
     index: true,

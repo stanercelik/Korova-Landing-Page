@@ -42,7 +42,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   
-  /* Custom CineMatch animations */
+  /* Custom Korova animations */
   --animate-fade-in: fadeIn 0.6s ease-in-out;
   --animate-slide-up: slideUp 0.8s ease-out;
   --animate-float: float 3s ease-in-out infinite;
@@ -125,7 +125,7 @@
     @apply bg-background text-foreground;
   }
   
-  /* Custom typography classes for CineMatch */
+  /* Custom typography classes for Korova */
   .heading-xl {
     @apply text-4xl md:text-6xl font-bold leading-tight;
   }
@@ -142,7 +142,7 @@
     @apply text-base md:text-lg;
   }
   
-  /* Custom animations for CineMatch */
+  /* Custom animations for Korova */
   @keyframes fadeIn {
     from {
       opacity: 0;

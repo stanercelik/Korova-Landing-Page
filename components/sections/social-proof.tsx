@@ -22,7 +22,7 @@ const testimonials: Testimonial[] = [
   {
     name: 'Sarah Chen',
     role: 'Film Student',
-    content: "Finally, an app that gets it! I've been waiting for something like CineMatch. Can't wait to find my fellow Kurosawa enthusiasts.",
+    content: "Finally, an app that gets it! I've been waiting for something like Korova. Can't wait to find my fellow Kurosawa enthusiasts.",
     rating: 5
   },
   {
@@ -34,7 +34,7 @@ const testimonials: Testimonial[] = [
   {
     name: 'Emma Rodriguez',
     role: 'Cinema Manager',
-    content: "The concept is brilliant. I work in a cinema and see how movies bring people together every day. CineMatch will be a game-changer.",
+    content: "The concept is brilliant. I work in a cinema and see how movies bring people together every day. Korova will be a game-changer.",
     rating: 5
   }
 ];
@@ -73,7 +73,7 @@ export function SocialProofSection() {
               Join the Movement
             </h2>
             <p className="body-lg text-muted-foreground max-w-3xl mx-auto">
-              Thousands of film lovers are already excited about CineMatch. 
+              Thousands of film lovers are already excited about Korova. 
               See what our early community is saying.
             </p>
           </div>
@@ -180,7 +180,7 @@ export function SocialProofSection() {
                   Early Access
                 </h4>
                 <p className="text-muted-foreground text-sm">
-                  Be the first to try new features and shape the future of CineMatch
+                  Be the first to try new features and shape the future of Korova
                 </p>
               </div>
             </div>

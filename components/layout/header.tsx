@@ -54,7 +54,7 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
           >
             <Film className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold text-foreground">
-              CineMatch
+              Korova
             </span>
           </motion.div>
 

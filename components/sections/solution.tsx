@@ -59,7 +59,7 @@ export function SolutionSection() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="heading-lg text-foreground mb-6">
-              Introducing CineMatch
+              Introducing Korova
             </h2>
             <p className="body-lg text-muted-foreground max-w-3xl mx-auto">
               The first platform that connects people through their love of cinema. 
@@ -72,7 +72,7 @@ export function SolutionSection() {
         <ScrollReveal delay={0.2}>
           <div className="mb-20">
             <h3 className="heading-md text-foreground text-center mb-12">
-              How It Works
+              How Korova Works
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
               {steps.map((step, index) => (
@@ -145,7 +145,7 @@ export function SolutionSection() {
         <ScrollReveal delay={0.6}>
           <div className="text-center bg-card/50 rounded-2xl p-8 border border-border">
             <h3 className="heading-md text-foreground mb-8">
-              Why CineMatch Works
+              Why Korova Works
             </h3>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <div className="text-left">

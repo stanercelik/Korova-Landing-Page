@@ -13,7 +13,7 @@ interface HeroSectionProps {
 
 export function HeroSection({
   headline = "Find Your People Through The Films You Love",
-  subHeadline = "Tired of superficial connections? CineMatch connects you with friends and partners based on your unique movie taste. Discover meaningful relationships through cinema.",
+  subHeadline = "Tired of superficial connections? Korova connects you with friends and partners based on your unique movie taste. Discover meaningful relationships through cinema.",
   ctaText = "Join the Waitlist"
 }: HeroSectionProps) {
   const { submitEmail, isSubmitting, isSubmitted } = useEmailCollection();
@@ -41,7 +41,7 @@ export function HeroSection({
           <div className="flex items-center justify-center mb-6">
             <Film className="h-16 w-16 text-primary mr-4" />
             <h1 className="heading-xl text-foreground">
-              CineMatch
+              Korova
             </h1>
           </div>
         </FadeIn>
@@ -64,7 +64,7 @@ export function HeroSection({
               <div className="text-center p-6 bg-card rounded-lg border border-border shadow-lg">
                 <Sparkles className="h-12 w-12 text-primary mx-auto mb-4 animate-pulse" />
                 <h3 className="text-xl font-semibold text-foreground mb-2">
-                  Welcome to the CineMatch Family!
+                  Welcome to the Korova Family!
                 </h3>
                 <p className="text-muted-foreground">
                   You're on the waitlist. We'll notify you when we launch.

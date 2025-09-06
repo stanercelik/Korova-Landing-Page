@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'cdn.cinematch.app',
+        hostname: 'cdn.korova.app',
       },
     ],
   },

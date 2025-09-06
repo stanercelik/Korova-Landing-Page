@@ -24,7 +24,7 @@ export function Footer() {
             <div className="flex items-center space-x-2">
               <Film className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold text-foreground">
-                CineMatch
+                Korova
               </span>
             </div>
             <p className="text-muted-foreground max-w-xs">
@@ -113,7 +113,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-foreground">Stay Updated</h3>
             <p className="text-muted-foreground text-sm">
-              Get the latest updates on CineMatch development and early access opportunities.
+              Get the latest updates on Korova development and early access opportunities.
             </p>
             <form onSubmit={handleNewsletterSubmit} className="space-y-2">
               <Input
@@ -134,7 +134,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
             <p className="text-muted-foreground text-sm">
-              © 2024 CineMatch. All rights reserved.
+              © 2024 Korova. All rights reserved.
             </p>
             <div className="flex space-x-4 text-sm">
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">

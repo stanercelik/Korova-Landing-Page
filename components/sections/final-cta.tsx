@@ -65,7 +65,7 @@ export function FinalCTASection() {
                   You're In! 🎬
                 </h3>
                 <p className="text-muted-foreground mb-4">
-                  Welcome to the CineMatch family! You'll be notified as soon as we launch.
+                  Welcome to the Korova family! You'll be notified as soon as we launch.
                 </p>
                 <Button
                   variant="outline"
@@ -125,7 +125,7 @@ export function FinalCTASection() {
               <span className="text-sm">— Ernest Hemingway</span>
             </p>
             <p className="text-muted-foreground mt-4">
-              Trust CineMatch to help you find people who truly understand your passions.
+              Trust Korova to help you find people who truly understand your passions.
             </p>
           </div>
         </ScrollReveal>

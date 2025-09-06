@@ -10,20 +10,20 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "How does CineMatch's movie matching work?",
+    question: "How does Korova's movie matching work?",
     answer: "Our proprietary algorithm analyzes your movie ratings, favorite genres, directors, and viewing patterns to create a unique 'Cinema DNA' profile. We then match you with people who have compatible taste, ensuring meaningful connections based on shared film interests."
   },
   {
-    question: "Is CineMatch just for dating or can I find friends too?",
-    answer: "CineMatch is for all types of connections! Whether you're looking for romantic partners, platonic friendships, movie buddies, or people to attend film festivals with - our platform accommodates different relationship goals."
+    question: "Is Korova just for dating or can I find friends too?",
+    answer: "Korova is for all types of connections! Whether you're looking for romantic partners, platonic friendships, movie buddies, or people to attend film festivals with - our platform accommodates different relationship goals."
   },
   {
-    question: "When will CineMatch launch?",
+    question: "When will Korova launch?",
     answer: "We're targeting a Q1 2025 launch for our beta version. Founder program members will get early access 30 days before the public launch. Join our waitlist to stay updated on our progress and get notified as soon as we're ready."
   },
   {
     question: "What's included in the Founder program?",
-    answer: "Founder members get lifetime access to CineMatch (no subscription fees), exclusive founder badges, priority customer support, input on feature development, beta testing access, and special merchandise. It's our way of thanking early supporters who believe in our vision."
+    answer: "Founder members get lifetime access to Korova (no subscription fees), exclusive founder badges, priority customer support, input on feature development, beta testing access, and special merchandise. It's our way of thanking early supporters who believe in our vision."
   },
   {
     question: "Is my data safe and private?",
@@ -34,15 +34,15 @@ const faqs: FAQItem[] = [
     answer: "No problem! You can easily skip matches or report inappropriate behavior. Our algorithm learns from your preferences and feedback to improve future matches. We also have community guidelines and moderation to ensure a safe, positive experience."
   },
   {
-    question: "Can I get a refund if I don't like CineMatch?",
-    answer: "Yes! We offer a 30-day money-back guarantee for all founder program purchases. If you're not satisfied with CineMatch within 30 days of launch, we'll refund your payment in full - no questions asked."
+    question: "Can I get a refund if I don't like Korova?",
+    answer: "Yes! We offer a 30-day money-back guarantee for all founder program purchases. If you're not satisfied with Korova within 30 days of launch, we'll refund your payment in full - no questions asked."
   },
   {
     question: "Will there be a mobile app?",
     answer: "Yes! We're developing both iOS and Android apps alongside our web platform. Mobile apps will be available at launch, with all the same features optimized for mobile use. You'll be able to browse matches, chat, and organize watch parties on the go."
   },
   {
-    question: "How much will CineMatch cost after launch?",
+    question: "How much will Korova cost after launch?",
     answer: "Our regular pricing will be $19.99/month for premium features. However, founder program members get lifetime access for a one-time payment - making it an incredible value. This is a limited-time opportunity to lock in lifetime access."
   }
 ];
@@ -58,7 +58,7 @@ export function FAQSection() {
               Frequently Asked Questions
             </h2>
             <p className="body-lg text-muted-foreground max-w-3xl mx-auto">
-              Have questions about CineMatch? We've got answers. 
+              Have questions about Korova? We've got answers. 
               If you don't see your question here, feel free to reach out to us.
             </p>
           </div>
@@ -98,7 +98,7 @@ export function FAQSection() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
-                  href="mailto:hello@cinematch.app"
+                  href="mailto:hello@korova.app"
                   className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
                 >
                   Email Us
