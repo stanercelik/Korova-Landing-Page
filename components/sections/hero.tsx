@@ -1,5 +1,7 @@
 'use client';
 
+// 1. ADIM: Gerekli state'leri yönetmek için useState'i import edin
+import { useState } from 'react';
 import { FadeIn } from '@/components/animations';
 import {
   InputButton,
@@ -24,6 +26,45 @@ export function HeroSection({
   ctaText = "Join the Waitlist"
 }: HeroSectionProps) {
   
+  // 2. ADIM: Gerekli state'leri ekleyin
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState('');
+
+  // 3. ADIM: Form gönderme fonksiyonunu yazın
+  const handleSubmit = async () => {
+    // Basit bir email format kontrolü
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) { 
+      setMessage('Please enter a valid email address.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setMessage('');
+
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setMessage('Thank you for joining! We will be in touch.');
+        setEmail(''); // Başarılı olunca input'u temizle
+      } else {
+        const data = await response.json();
+        setMessage(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      setMessage('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const movieFrames = [
     {
       src: "/movie-frames/in-the-mood-for-love.png",
@@ -137,13 +178,36 @@ export function HeroSection({
             
             <FadeIn delay={0.8}>
               <div className="max-w-md mb-6">
+                
+                {/* 4. ADIM: JSX'i state ve fonksiyonlar ile bağlayın */}
                 <InputButtonProvider>
                   <InputButton>
                     <InputButtonAction>{ctaText}</InputButtonAction>
-                    <InputButtonSubmit>Join Waitlist</InputButtonSubmit>
+                    
+                    <InputButtonSubmit 
+                      onClick={handleSubmit} 
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+                    </InputButtonSubmit>
                   </InputButton>
-                  <InputButtonInput type="email" placeholder="Enter your email address" />
+                  
+                  <InputButtonInput 
+                    type="email" 
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    name="email"
+                  />
                 </InputButtonProvider>
+                
+                {/* 5. ADIM: Kullanıcıya geri bildirim mesajı gösterin */}
+                {message && (
+                  <p className={`mt-2 text-sm transition-opacity duration-300 ${message.includes('Thank you') ? 'text-green-400' : 'text-red-400'}`}>
+                    {message}
+                  </p>
+                )}
+
               </div>
             </FadeIn>
             
