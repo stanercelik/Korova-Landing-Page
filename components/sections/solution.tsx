@@ -180,10 +180,10 @@ export function SolutionSection() {
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
-                  className="h-full"
+                  className="h-full flex flex-col"
                 >
                   <WobbleCard 
-                    containerClassName={`min-h-[200px] relative overflow-hidden ${
+                    containerClassName={`h-full min-h-[280px] relative overflow-hidden flex flex-col ${
                       feature.highlight 
                         ? 'bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20' 
                         : 'bg-gradient-to-br from-background/90 to-background/80 border-border/50'
@@ -220,7 +220,7 @@ export function SolutionSection() {
                         <div className="absolute inset-0 bg-black/50" />
                       </div>
                     )}
-                    <div className="relative p-6 h-full flex flex-col">
+                    <div className="relative p-6 h-full flex flex-col justify-between">
                       <div className="flex items-start space-x-4 mb-4">
                         <motion.div 
                           className={`w-12 h-12 rounded-lg flex items-center justify-center ${

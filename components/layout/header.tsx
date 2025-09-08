@@ -51,7 +51,7 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
             transition={{ type: 'spring', stiffness: 400 }}
           >
             <img 
-              src="/korova-logo.png" 
+              src="/fav-icon-yellow.png" 
               alt="Korova" 
               className="h-8 w-8 object-contain"
             />
