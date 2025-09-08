@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Film, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { smoothScrollToSection } from '@/lib/smooth-scroll';
 
 interface HeaderProps {
   transparent?: boolean;
@@ -25,10 +26,7 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    smoothScrollToSection(sectionId);
     setIsMobileMenuOpen(false);
   };
 
@@ -52,7 +50,11 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400 }}
           >
-            <Film className="h-8 w-8 text-primary" />
+            <img 
+              src="/korova-logo.png" 
+              alt="Korova" 
+              className="h-8 w-8 object-contain"
+            />
             <span className="text-xl font-bold text-foreground">
               Korova
             </span>
@@ -73,12 +75,6 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
               Solution
             </button>
             <button
-              onClick={() => scrollToSection('pricing')}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Pricing
-            </button>
-            <button
               onClick={() => scrollToSection('faq')}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -88,21 +84,12 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            {showFounderCTA && (
-              <Button
-                variant="default"
-                onClick={() => scrollToSection('founder-tiers')}
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
-              >
-                Become a Founder
-              </Button>
-            )}
             <Button
-              variant="outline"
+              variant="default"
               onClick={() => scrollToSection('hero')}
-              className="border-border hover:bg-accent"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              Join Waitlist
+              Bekleme Listesine Katıl
             </Button>
           </div>
 
@@ -138,33 +125,18 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
                 Solution
               </button>
               <button
-                onClick={() => scrollToSection('pricing')}
-                className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Pricing
-              </button>
-              <button
                 onClick={() => scrollToSection('faq')}
                 className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 FAQ
               </button>
               <div className="px-3 pt-2 space-y-2">
-                {showFounderCTA && (
-                  <Button
-                    variant="default"
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                    onClick={() => scrollToSection('founder-tiers')}
-                  >
-                    Become a Founder
-                  </Button>
-                )}
                 <Button
-                  variant="outline"
-                  className="w-full border-border hover:bg-accent"
+                  variant="default"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   onClick={() => scrollToSection('hero')}
                 >
-                  Join Waitlist
+                  Bekleme Listesine Katıl
                 </Button>
               </div>
             </div>

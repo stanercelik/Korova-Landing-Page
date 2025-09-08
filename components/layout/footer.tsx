@@ -9,10 +9,36 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Newsletter subscription logic will be implemented later
-    console.log('Newsletter subscription');
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get('email') as string;
+    const subject = formData.get('subject') as string;
+    const message = formData.get('message') as string;
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          subject,
+          message,
+          to: 'tanercelik2001@gmail.com'
+        }),
+      });
+      
+      if (response.ok) {
+        alert('Message sent successfully!');
+        (e.target as HTMLFormElement).reset();
+      } else {
+        alert('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      alert('Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -109,21 +135,37 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* Contact Form */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Stay Updated</h3>
+            <h3 className="text-lg font-semibold text-foreground">Contact Us</h3>
             <p className="text-muted-foreground text-sm">
-              Get the latest updates on Korova development and early access opportunities.
+              Have questions or feedback? We'd love to hear from you.
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="space-y-2">
+            <form onSubmit={handleContactSubmit} className="space-y-3">
               <Input
+                name="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Your email address"
                 className="bg-background border-border"
+                required
+              />
+              <Input
+                name="subject"
+                type="text"
+                placeholder="Subject"
+                className="bg-background border-border"
+                required
+              />
+              <textarea
+                name="message"
+                placeholder="Your message"
+                className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
+                rows={3}
+                required
               />
               <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
                 <Mail className="h-4 w-4 mr-2" />
-                Subscribe
+                Send Message
               </Button>
             </form>
           </div>

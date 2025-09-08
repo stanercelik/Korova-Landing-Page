@@ -5,4 +5,3 @@ export { SolutionSection } from './solution';
 export { SocialProofSection } from './social-proof';
 export { FounderTiersSection } from './founder-tiers';
 export { FAQSection } from './faq';
-export { FinalCTASection } from './final-cta';
