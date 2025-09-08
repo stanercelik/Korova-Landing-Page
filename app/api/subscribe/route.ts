@@ -189,9 +189,9 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('❌ [SUBSCRIBE] Subscribe API Error:', error);
     console.error('❌ [SUBSCRIBE] Error details:', {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
+      message: (error as Error).message,
+      stack: (error as Error).stack,
+      name: (error as Error).name
     });
     
     return NextResponse.json(

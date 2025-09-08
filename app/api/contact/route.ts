@@ -61,9 +61,9 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('❌ [CONTACT] Hata oluştu:', error);
     console.error('❌ [CONTACT] Hata detayları:', {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
+      message: (error as Error).message,
+      stack: (error as Error).stack,
+      name: (error as Error).name
     });
     
     return NextResponse.json(
