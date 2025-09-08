@@ -31,6 +31,7 @@ export function WaitlistForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('🔍 [WAITLIST] Form submit başlatıldı');
     
     if (!email.trim()) {
       setMessage('Please enter your email address.');
@@ -39,28 +40,39 @@ export function WaitlistForm({
 
     setIsLoading(true);
     setMessage('Adding you to the waitlist...');
+    console.log('📧 [WAITLIST] Email:', email.trim());
 
     try {
-      const formData = new FormData();
-      formData.append('form-name', 'waitlist');
-      formData.append('email', email.trim());
-
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as any).toString()
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email.trim() }),
       });
+
+      console.log('📋 [WAITLIST] Response:', {
+        status: response.status,
+        ok: response.ok,
+        statusText: response.statusText
+      });
+
+      const data = await response.json();
+      console.log('📄 [WAITLIST] Data:', data);
 
       if (response.ok) {
         setIsSuccess(true);
-        setMessage('🎉 Amazing! You\'ve successfully joined the waitlist. Don\'t forget to check your emails for updates!');
+        setMessage('🎉 Amazing! You\'ve successfully joined the waitlist. Check your email for a welcome message!');
         setEmail('');
         setShowConfetti(true);
         setTimeout(() => setShowConfetti(false), 4000);
+        console.log('✅ [WAITLIST] Success!');
       } else {
-        setMessage('An error occurred. Please try again.');
+        setMessage(data.error || 'An error occurred. Please try again.');
+        console.log('❌ [WAITLIST] API Error:', data.error);
       }
     } catch (error) {
+      console.error('❌ [WAITLIST] Network Error:', error);
       setMessage('Connection error occurred. Please try again.');
     } finally {
       setIsLoading(false);

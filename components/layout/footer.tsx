@@ -1,8 +1,7 @@
 'use client';
 
-import { Film, Mail, Twitter, Instagram, Youtube } from 'lucide-react';
+import { Film, Twitter, Instagram, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { smoothScrollToSection } from '@/lib/smooth-scroll';
 
 export function Footer() {
@@ -10,37 +9,11 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-    
-    // Add form-name for Netlify
-    formData.append('form-name', 'contact');
-
-    try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as any).toString()
-      });
-      
-      if (response.ok) {
-        alert('Message sent successfully!');
-        form.reset();
-      } else {
-        alert('Failed to send message. Please try again.');
-      }
-    } catch (error) {
-      alert('Failed to send message. Please try again.');
-    }
-  };
 
   return (
     <footer className="bg-card border-t border-border/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -105,40 +78,6 @@ export function Footer() {
           </div>
 
 
-          {/* Contact Form */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Contact Us</h3>
-            <p className="text-muted-foreground text-sm">
-              Have questions or feedback? We'd love to hear from you.
-            </p>
-            <form onSubmit={handleContactSubmit} className="space-y-3">
-              <Input
-                name="email"
-                type="email"
-                placeholder="Your email address"
-                className="bg-background border-border"
-                required
-              />
-              <Input
-                name="subject"
-                type="text"
-                placeholder="Subject"
-                className="bg-background border-border"
-                required
-              />
-              <textarea
-                name="message"
-                placeholder="Your message"
-                className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
-                rows={3}
-                required
-              />
-              <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                <Mail className="h-4 w-4 mr-2" />
-                Send Message
-              </Button>
-            </form>
-          </div>
         </div>
 
         <hr className="my-8 border-border/20" />

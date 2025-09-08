@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
-import { HiddenNetlifyForms } from "@/components/hidden-forms";
 import "./globals.css";
 import "../styles/globals.css";
 import "../styles/animations.css";
@@ -75,7 +74,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <HiddenNetlifyForms />
       </body>
     </html>
   );
