@@ -136,11 +136,11 @@ export function HeroSection({
             </FadeIn>
             
             <FadeIn delay={0.8}>
-              <div className="max-w-md mb-8">
+              <div className="max-w-md mb-6">
                 <InputButtonProvider>
                   <InputButton>
                     <InputButtonAction>{ctaText}</InputButtonAction>
-                    <InputButtonSubmit>Subscribe</InputButtonSubmit>
+                    <InputButtonSubmit>Join Waitlist</InputButtonSubmit>
                   </InputButton>
                   <InputButtonInput type="email" placeholder="Enter your email address" />
                 </InputButtonProvider>
@@ -148,8 +148,15 @@ export function HeroSection({
             </FadeIn>
             
             <FadeIn delay={1.0}>
+              <div className="text-sm text-muted-foreground mb-4">
+                <p className="mb-2 text-xs"><span className="inline-flex items-center px-2 py-1 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">✨ Early Adopter Badge</span> Waitlist members get exclusive early access badge</p>
+                <p>Join <span className="text-primary font-semibold">5,000+</span> movie lovers already on the waitlist</p>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={1.2}>
               <div className="flex justify-start flex-wrap gap-2">
-                <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 flex items-center space-x-2 overflow-hidden">
+                <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 flex items-center space-x-2 overflow-hidden min-w-[100px] h-10">
                   <div className="absolute inset-0 opacity-20">
                     <img 
                       src="/images/find-love-image.jpeg" 
@@ -164,7 +171,7 @@ export function HeroSection({
                   </div>
                 </div>
                 
-                <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 flex items-center space-x-2 overflow-hidden">
+                <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 flex items-center space-x-2 overflow-hidden min-w-[100px] h-10">
                   <div className="absolute inset-0 opacity-20">
                     <img 
                       src="/images/make-friends-image.jpeg" 
@@ -179,7 +186,7 @@ export function HeroSection({
                   </div>
                 </div>
                 
-                <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 flex items-center space-x-2 overflow-hidden">
+                <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 flex items-center space-x-2 overflow-hidden min-w-[100px] h-10">
                   <div className="absolute inset-0 opacity-20">
                     <img 
                       src="/images/share-movies-image.jpeg" 
@@ -195,18 +202,12 @@ export function HeroSection({
                 </div>
               </div>
             </FadeIn>
-            
-            <FadeIn delay={1.2}>
-              <div className="text-sm text-muted-foreground pt-4">
-                <p>Join <span className="text-primary font-semibold">5,000+</span> movie lovers already on the waitlist</p>
-              </div>
-            </FadeIn>
           </div>
 
           {/* Right Content - iPhone Mockup with Movie Frames */}
           <div className="relative flex justify-center lg:justify-end">
             <FadeIn delay={0.6}>
-              <div className="relative w-full max-w-[280px] mx-auto">
+              <div className="relative w-full max-w-[350px] mx-auto">
                 {/* iPhone Mockup Container */}
                 <div className="relative">
                   <Iphone15Pro className="w-full h-auto drop-shadow-2xl" />
@@ -225,9 +226,9 @@ export function HeroSection({
                   </div>
                 </div>
                 
-                {/* Static Movie Frame Decorations */}
-                <div className="absolute -top-6 -left-6 z-10 opacity-70">
-                  <div className="w-14 h-20 bg-card rounded-lg overflow-hidden border border-border/30 shadow-md">
+                {/* Static Movie Frame Decorations - scaled proportionally */}
+                <div className="absolute -top-9 -left-9 z-10 opacity-70">
+                  <div className="w-21 h-30 bg-card rounded-lg overflow-hidden border border-border/30 shadow-md">
                     <img 
                       src={movieFrames[4]?.src || movieFrames[0].src}
                       alt="Movie frame"
@@ -236,8 +237,8 @@ export function HeroSection({
                   </div>
                 </div>
                 
-                <div className="absolute -bottom-3 -right-4 z-10 opacity-60">
-                  <div className="w-16 h-10 bg-card rounded-lg overflow-hidden border border-border/30 shadow-md">
+                <div className="absolute -bottom-5 -right-6 z-10 opacity-60">
+                  <div className="w-24 h-15 bg-card rounded-lg overflow-hidden border border-border/30 shadow-md">
                     <img 
                       src={movieFrames[1].src}
                       alt="Movie frame"

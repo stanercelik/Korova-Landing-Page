@@ -3,6 +3,7 @@
 import { Film, Mail, Twitter, Instagram, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { smoothScrollToSection } from '@/lib/smooth-scroll';
 
 export function Footer() {
   const scrollToTop = () => {
@@ -44,7 +45,7 @@ export function Footer() {
   return (
     <footer className="bg-card border-t border-border/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -75,7 +76,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <button 
-                  onClick={() => document.getElementById('problem')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => smoothScrollToSection('problem')}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   How it Works
@@ -83,7 +84,7 @@ export function Footer() {
               </li>
               <li>
                 <button 
-                  onClick={() => document.getElementById('solution')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => smoothScrollToSection('solution')}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Features
@@ -91,7 +92,7 @@ export function Footer() {
               </li>
               <li>
                 <button 
-                  onClick={() => document.getElementById('founder-tiers')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => smoothScrollToSection('founder-tiers')}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Pricing
@@ -99,7 +100,7 @@ export function Footer() {
               </li>
               <li>
                 <button 
-                  onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => smoothScrollToSection('faq')}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   FAQ
@@ -108,32 +109,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Company</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
 
           {/* Contact Form */}
           <div className="space-y-4">

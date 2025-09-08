@@ -89,7 +89,7 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
               onClick={() => scrollToSection('hero')}
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              Bekleme Listesine Katıl
+              Join Waitlist
             </Button>
           </div>
 
@@ -136,7 +136,7 @@ export function Header({ transparent = false, showFounderCTA = true }: HeaderPro
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   onClick={() => scrollToSection('hero')}
                 >
-                  Bekleme Listesine Katıl
+                  Join Waitlist
                 </Button>
               </div>
             </div>
