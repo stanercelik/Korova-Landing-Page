@@ -41,15 +41,15 @@ export function WaitlistForm({
     setMessage('Adding you to the waitlist...');
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email.trim() }),
-      });
+      const formData = new FormData();
+      formData.append('form-name', 'waitlist');
+      formData.append('email', email.trim());
 
-      const data = await response.json();
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString()
+      });
 
       if (response.ok) {
         setIsSuccess(true);
@@ -58,7 +58,7 @@ export function WaitlistForm({
         setShowConfetti(true);
         setTimeout(() => setShowConfetti(false), 4000);
       } else {
-        setMessage(data.error || 'An error occurred. Please try again.');
+        setMessage('An error occurred. Please try again.');
       }
     } catch (error) {
       setMessage('Connection error occurred. Please try again.');

@@ -1,22 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 export async function POST(request: NextRequest) {
+  console.log('🔍 [CONTACT] API route başlatıldı');
+  
   try {
     const { email, subject, message, to } = await request.json();
+    console.log('📧 [CONTACT] İstek verileri:', { email, subject, to, messageLength: message?.length });
 
-    // Create transporter (you'll need to configure with your email service)
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
+    // Environment variables kontrolü
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const fromEmail = process.env.FROM_EMAIL || 'noreply@korova.app';
+    
+    console.log('🔑 [CONTACT] Env değişkenleri:', { 
+      hasResendKey: !!resendApiKey, 
+      fromEmail,
+      resendKeyPrefix: resendApiKey?.substring(0, 8) + '...' 
     });
 
-    const mailOptions = {
-      from: email,
+    if (!resendApiKey) {
+      console.error('❌ [CONTACT] RESEND_API_KEY bulunamadı');
+      return NextResponse.json(
+        { success: false, error: 'Email service yapılandırma hatası' },
+        { status: 500 }
+      );
+    }
+
+    // Resend client oluştur
+    const resend = new Resend(resendApiKey);
+    console.log('✅ [CONTACT] Resend client oluşturuldu');
+
+    const emailData = {
+      from: fromEmail,
       to: to,
+      replyTo: email,
       subject: `Contact Form: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -33,14 +50,36 @@ export async function POST(request: NextRequest) {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
-
-    return NextResponse.json({ success: true }, { status: 200 });
+    console.log('📤 [CONTACT] Email gönderiliyor:', { from: emailData.from, to: emailData.to });
+    
+    const result = await resend.emails.send(emailData);
+    
+    console.log('✅ [CONTACT] Email başarıyla gönderildi:', result);
+    
+    return NextResponse.json({ success: true, emailId: result.data?.id }, { status: 200 });
+    
   } catch (error) {
-    console.error('Contact form error:', error);
+    console.error('❌ [CONTACT] Hata oluştu:', error);
+    console.error('❌ [CONTACT] Hata detayları:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+    
     return NextResponse.json(
       { success: false, error: 'Failed to send message' },
       { status: 500 }
     );
   }
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
 }

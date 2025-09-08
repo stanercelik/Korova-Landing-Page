@@ -12,28 +12,23 @@ export function Footer() {
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const email = formData.get('email') as string;
-    const subject = formData.get('subject') as string;
-    const message = formData.get('message') as string;
     
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    // Add form-name for Netlify
+    formData.append('form-name', 'contact');
+
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          subject,
-          message,
-          to: 'tanercelik2001@gmail.com'
-        }),
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString()
       });
       
       if (response.ok) {
         alert('Message sent successfully!');
-        (e.target as HTMLFormElement).reset();
+        form.reset();
       } else {
         alert('Failed to send message. Please try again.');
       }

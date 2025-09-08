@@ -1,43 +1,74 @@
-import { NextRequest, NextResponse } from 'next/server';
+exports.handler = async (event, context) => {
+  console.log('🔍 [NETLIFY-SUBSCRIBE] Function başlatıldı');
+  console.log('🌐 [NETLIFY-SUBSCRIBE] Event:', {
+    httpMethod: event.httpMethod,
+    headers: event.headers,
+    body: event.body ? 'Present' : 'Not present'
+  });
 
-export async function POST(request: NextRequest) {
-  console.log('🔍 [SUBSCRIBE] API route başlatıldı');
-  
+  // CORS headers
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+
+  // Handle CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: '',
+    };
+  }
+
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ error: 'Method not allowed' }),
+    };
+  }
+
   try {
-    const { email } = await request.json();
-    console.log('📧 [SUBSCRIBE] İstek verileri:', { email });
+    const { email } = JSON.parse(event.body);
+    console.log('📧 [NETLIFY-SUBSCRIBE] İstek verileri:', { email });
     
     if (!email) {
-      return NextResponse.json(
-        { error: 'E-posta adresi gerekli.' },
-        { status: 400 }
-      );
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'E-posta adresi gerekli.' }),
+      };
     }
 
     // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Geçerli bir e-posta adresi girin.' },
-        { status: 400 }
-      );
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Geçerli bir e-posta adresi girin.' }),
+      };
     }
 
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
     const BREVO_LIST_ID = process.env.BREVO_LIST_ID || '3'; // Default to list ID 3
 
-    console.log('🔑 [SUBSCRIBE] Env değişkenleri:', {
+    console.log('🔑 [NETLIFY-SUBSCRIBE] Env değişkenleri:', {
       hasBrevoKey: !!BREVO_API_KEY,
       brevoListId: BREVO_LIST_ID,
-      brevoKeyPrefix: BREVO_API_KEY?.substring(0, 10) + '...'
+      brevoKeyPrefix: BREVO_API_KEY?.substring(0, 10) + '...',
+      allEnvKeys: Object.keys(process.env).filter(key => key.includes('BREVO'))
     });
 
     if (!BREVO_API_KEY) {
-      console.error('❌ [SUBSCRIBE] BREVO_API_KEY environment variable is not set');
-      return NextResponse.json(
-        { error: 'Sunucu yapılandırma hatası.' },
-        { status: 500 }
-      );
+      console.error('❌ [NETLIFY-SUBSCRIBE] BREVO_API_KEY environment variable is not set');
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Sunucu yapılandırma hatası.' }),
+      };
     }
 
     // Add contact to Brevo
@@ -51,7 +82,7 @@ export async function POST(request: NextRequest) {
       }
     };
     
-    console.log('📤 [SUBSCRIBE] Brevo contact ekleniyor:', contactData);
+    console.log('📤 [NETLIFY-SUBSCRIBE] Brevo contact ekleniyor:', contactData);
     
     const response = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
@@ -62,7 +93,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(contactData),
     });
     
-    console.log('📋 [SUBSCRIBE] Brevo API yanıtı:', {
+    console.log('📋 [NETLIFY-SUBSCRIBE] Brevo API yanıtı:', {
       status: response.status,
       statusText: response.statusText,
       ok: response.ok
@@ -70,7 +101,7 @@ export async function POST(request: NextRequest) {
 
     // If successful, send welcome email
     if (response.ok) {
-      console.log('✅ [SUBSCRIBE] Contact başarıyla eklendi, welcome email gönderiliyor');
+      console.log('✅ [NETLIFY-SUBSCRIBE] Contact başarıyla eklendi, welcome email gönderiliyor');
       
       try {
         const emailResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
@@ -139,7 +170,7 @@ export async function POST(request: NextRequest) {
           }),
         });
         
-        console.log('📧 [SUBSCRIBE] Welcome email yanıtı:', {
+        console.log('📧 [NETLIFY-SUBSCRIBE] Welcome email yanıtı:', {
           status: emailResponse.status,
           statusText: emailResponse.statusText,
           ok: emailResponse.ok
@@ -147,20 +178,20 @@ export async function POST(request: NextRequest) {
         
         if (!emailResponse.ok) {
           const emailErrorData = await emailResponse.json();
-          console.error('❌ [SUBSCRIBE] Welcome email hatası:', emailErrorData);
+          console.error('❌ [NETLIFY-SUBSCRIBE] Welcome email hatası:', emailErrorData);
         } else {
-          console.log('✅ [SUBSCRIBE] Welcome email başarıyla gönderildi');
+          console.log('✅ [NETLIFY-SUBSCRIBE] Welcome email başarıyla gönderildi');
         }
         
       } catch (emailError) {
-        console.error('❌ [SUBSCRIBE] Welcome email could not be sent, but signup was successful:', emailError);
+        console.error('❌ [NETLIFY-SUBSCRIBE] Welcome email could not be sent, but signup was successful:', emailError);
       }
     }
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('❌ [SUBSCRIBE] Brevo API Error:', errorData);
-      console.error('❌ [SUBSCRIBE] Full error response:', {
+      console.error('❌ [NETLIFY-SUBSCRIBE] Brevo API Error:', errorData);
+      console.error('❌ [NETLIFY-SUBSCRIBE] Full error response:', {
         status: response.status,
         statusText: response.statusText,
         headers: Object.fromEntries(response.headers),
@@ -169,45 +200,38 @@ export async function POST(request: NextRequest) {
       
       // Handle duplicate email case
       if (response.status === 400 && errorData.code === 'duplicate_parameter') {
-        return NextResponse.json(
-          { error: 'Bu e-posta adresi zaten listede mevcut.' },
-          { status: 400 }
-        );
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: 'Bu e-posta adresi zaten listede mevcut.' }),
+        };
       }
       
-      return NextResponse.json(
-        { error: 'Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.' },
-        { status: 500 }
-      );
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.' }),
+      };
     }
 
-    return NextResponse.json(
-      { success: true, message: 'Başarıyla bekleme listesine eklendiniz!' },
-      { status: 200 }
-    );
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ success: true, message: 'Başarıyla bekleme listesine eklendiniz!' }),
+    };
 
   } catch (error) {
-    console.error('❌ [SUBSCRIBE] Subscribe API Error:', error);
-    console.error('❌ [SUBSCRIBE] Error details:', {
+    console.error('❌ [NETLIFY-SUBSCRIBE] Subscribe API Error:', error);
+    console.error('❌ [NETLIFY-SUBSCRIBE] Error details:', {
       message: error.message,
       stack: error.stack,
       name: error.name
     });
     
-    return NextResponse.json(
-      { error: 'Sunucu hatası oluştu. Lütfen tekrar deneyin.' },
-      { status: 500 }
-    );
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: 'Sunucu hatası oluştu. Lütfen tekrar deneyin.' }),
+    };
   }
-}
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  });
-}
+};
